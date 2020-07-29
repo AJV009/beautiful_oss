@@ -64,6 +64,6 @@ function jsalert($msg){
     echo '<script> alert(" '.$msg.' "); </script>';
 }
 function jsloc($uri){
-    echo '<script> window.location.href='.$uri.'; </script>';
+    echo '<script> window.location.replace("'.$uri.'"); </script>';
 }
 ?>

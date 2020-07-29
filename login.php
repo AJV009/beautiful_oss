@@ -1,7 +1,6 @@
 <?php
 include_once 'php/pagesetup.php';
 pageHead('Login');
-$username = $email = $password = "";
 ?>
 <section>
         <div class="w3-container " style="margin-top:1%">
@@ -31,7 +30,8 @@ $username = $email = $password = "";
 </section>
 <?php
 pageFoot();
-// LOGIN/SIGNUP LOGIC BOARD 😂😂😂
+// LOGIN/SIGNUP LOGIC BOARD 😂
+$username = $email = $password = "";
 function test_input($data) {
     $data = trim($data);
     $data = stripslashes($data);
@@ -45,7 +45,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $password = test_input($_POST["password"]);
         $query = 'select * from users where username = "'.$username.'"';
         $requests = $mysqli -> query($query);
-        if(password_verify($password,$requests['password'])){
+        $dbrow = mysqli_fetch_array($requests);
+        if(password_verify($password,$dbrow['password'])){
             jsalert("Logged in successfully!");
             jsloc("index.php");
         } else { jsalert("Incorrect password/username, please try again!"); jsloc("index.php"); } }
