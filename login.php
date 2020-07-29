@@ -1,5 +1,6 @@
 <?php
 include_once 'php/sessionmanager.php';
+sessionClear();
 sessionConfig();
 include_once 'php/pagesetup.php';
 pageHead('Login');

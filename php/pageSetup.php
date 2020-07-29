@@ -5,8 +5,17 @@ pageFoot() - Page Footer!
 jsalert($msg) - create alert
 jsloc($loc) - change locations
 */
-function pageHead($t,$log='Login') {
-    $title = 'BOSS: '.$t;
+function pageHead($t) {
+	$title = 'BOSS: '.$t;
+	$log = 'Login';
+	$blogvar = '';
+	if(isset($_SESSION['uid'])){
+		$log = 'Logout';
+		$blogvar = '
+				<a href="blogpanel.php?w=add" class="w3-bar-item w3-btn w3-mobile w3-right w3-hover-pale-green">Add</a>
+				<a href="blogpanel.php?w=view" class="w3-bar-item w3-btn w3-mobile w3-right w3-hover-pale-green">View</a>
+		';
+	}
     $pH1 = 'Beautiful Open Source Software Blogs!';
     echo '
 
@@ -31,6 +40,7 @@ function pageHead($t,$log='Login') {
 				<div class="w3-bar w3-green w3-card-4">
 					<a href="index.php" class="w3-bar-item w3-btn w3-mobile w3-hover-pale-green">Home</a>
 					<a href="login.php" class="w3-bar-item w3-btn w3-mobile w3-right w3-hover-pale-green">'.$log.'</a>
+					'.$blogvar.'
 				</div>
 			</div>
 	</section>
