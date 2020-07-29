@@ -21,8 +21,10 @@ function pageHead($t,$log='Login') {
 			background-image: url("images/c3.webp"); }
 	 </style>
 	 </head>
-		<div class="w3-top">
-			<div class="w3-container w3-teal w3-card-4" align=center style="margin-bottom: 500%;">
+
+	 <body style="padding-top: 100px;">
+	 <section>
+			<div class="w3-top w3-container w3-teal w3-card-4" align=center style="margin-bottom: 500%;">
 				<img style="display: inline; width:13%; height:13%;" class="w3-padding" src="images/logo.webp" alt="logo" />
 				<h1 style="display: inline;">'.$pH1.'</h1>
 				<div class="w3-bar w3-green w3-card-4">
@@ -30,8 +32,7 @@ function pageHead($t,$log='Login') {
 					<a href="login.php" class="w3-bar-item w3-btn w3-mobile w3-right w3-hover-pale-green">'.$log.'</a>
 				</div>
 			</div>
-		</div>
-		<body style="padding-top: 100px;">
+	</section>
     ';
 }
 
