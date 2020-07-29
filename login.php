@@ -1,4 +1,6 @@
 <?php
+include_once 'php/sessionmanager.php';
+sessionConfig();
 include_once 'php/pagesetup.php';
 pageHead('Login');
 ?>
@@ -47,9 +49,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $requests = $mysqli -> query($query);
         $dbrow = mysqli_fetch_array($requests);
         if(password_verify($password,$dbrow['password'])){
+            $_SESSION['uid'] = $username;
             jsalert("Logged in successfully!");
             jsloc("index.php");
-        } else { jsalert("Incorrect password/username, please try again!"); jsloc("index.php"); } }
+        } else { jsalert("Incorrect password/username, please try again!"); jsloc("index.php"); sessionClear();} }
     if( isset( $_POST['signup'] ) ){
         $username = test_input($_POST["username"]);
         $email = test_input($_POST["email"]);
@@ -57,11 +60,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $query = 'select * from users where username = "'.$username.'" OR email = "'.$email.'"';
         $requests = $mysqli -> query($query);
         if (!preg_match("/^[0-9a-zA-Z]+$/",$username)) {
-            jsalert("Username: Only letters and numbers allowed"); jsloc("login.php"); }
+            jsalert("Username: Only letters and numbers allowed"); jsloc("login.php"); sessionClear();}
         else if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
             jsalert("Email: Invalid email format"); jsloc("login.php"); }
         else if (!preg_match("/^((?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[\W_]).{6,50})$/",$password)) {
-            jsalert("Password: 1 Lower and Upper case character, 1 number, 1 special character and must be at least 6 characters and at most 50"); jsloc("login.php"); }
+            jsalert("Password: 1 Lower and Upper case character, 1 number, 1 special character and must be at least 6 characters and at most 50"); jsloc("login.php"); sessionClear();}
         else if(mysqli_num_rows($requests)<=0){
             $hashedpassword = password_hash($password, PASSWORD_ARGON2ID);
             $query = 'insert into users (username, email, password) values ("'.$username.'","'.$email.'","'.$hashedpassword.'")'; 
@@ -69,7 +72,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             jsalert("Hi ".$username.", Registration Successful! Now you can login");
             jsloc("login.php"); }
         else {
-            jsalert("Username/Email already existing!"); jsloc("login.php");
+            jsalert("Username/Email already existing!"); jsloc("login.php"); sessionClear();
         }
     }
 }

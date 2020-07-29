@@ -37,7 +37,7 @@ function pageHead($t,$log='Login') {
     ';
 }
 
-function pageMsgSection($msg){
+function pageMsg($msg){
 	echo '
 	<div class="w3-container w3-card-4 w3-pale-green w3-margin" style="margin-left: 10%; margin-right: 10%">
 		<p>'.$msg.'</p>
