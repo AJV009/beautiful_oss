@@ -23,6 +23,7 @@ function pageHead($t,$log='Login') {
 	 </head>
 
 	 <body style="padding-top: 100px;">
+	 <STYLE>A {text-decoration: none;} </STYLE>
 	 <section>
 			<div class="w3-top w3-container w3-teal w3-card-4" align=center style="margin-bottom: 500%;">
 				<img style="display: inline; width:13%; height:13%;" class="w3-padding" src="images/logo.webp" alt="logo" />
