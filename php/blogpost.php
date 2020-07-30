@@ -150,17 +150,4 @@ function blogEdit($blogId){
         }
     }
 }
-
-function blogDelete($blogId){
-    function test_input($data) {
-        $data = trim($data);
-        $data = stripslashes($data);
-        $data = htmlspecialchars($data);
-        return $data;
-    }
-    $blogId = test_input($blogId);
-    $mysqli = new mysqli("localhost","root","","boss");
-    $uid = $_SESSION['uid'];
-    $query = 'delet from posts where id = '.$blogId.' and username='.$_SESSION['uid'].'';
-}
 ?>
