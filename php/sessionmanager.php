@@ -30,4 +30,9 @@ function sessionClear(){
         unset($_SESSION[$key]);
     }
 }
+function sessionCheck(){
+    if(!isset($_SESSION['uid'])){
+        jsloc('index.php');
+    }
+}
 ?>

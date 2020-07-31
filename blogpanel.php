@@ -5,6 +5,7 @@ error_reporting(0);
 include_once 'php/pagesetup.php';
 include_once 'php/blogpost.php';
 include_once 'php/sqlmanager.php';
+sessionCheck();
 pageHead('Home');
 $opt = $_GET['w'];
 if($opt=='view'){
@@ -20,7 +21,7 @@ if($opt=='view'){
     $uid = $_SESSION['uid'];
     // $query = 'delete from posts where id='.$blogId.' AND username='.$uid.' ';
     $query = 'delete from posts where id='.$blogId.' ';
-    $mysqli -> query($query);
+    $GLOBALS['mysqli'] -> query($query);
     jsalert("Hi ".$uid.", Post Successfuly deleted!");
     jsloc("blogpanel.php?w=view");
 } else blogDispId();

@@ -7,7 +7,7 @@ include_once 'php/blogpost.php';
 include_once 'php/sqlmanager.php';
 pageHead('Home');
 $query = "select * from posts where id=".$blogid."";
-$requests = $mysqli -> query($query);
+$requests = $GLOBALS['mysqli'] -> query($query);
 while ($row=mysqli_fetch_array($requests)) {
     $blog_id=$row['id'];
     $blog_title=$row['title'];

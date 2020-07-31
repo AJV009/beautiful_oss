@@ -41,7 +41,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $username = test_input($_POST["username"]);
         $password = test_input($_POST["password"]);
         $query = 'select * from users where username = "'.$username.'"';
-        $requests = $mysqli -> query($query);
+        $requests = $GLOBALS['mysqli'] -> query($query);
         $dbrow = mysqli_fetch_array($requests);
         if(password_verify($password,$dbrow['password'])){
             $_SESSION['uid'] = $username;
@@ -53,7 +53,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $email = test_input($_POST["email"]);
         $password = test_input($_POST["password"]);
         $query = 'select * from users where username = "'.$username.'" OR email = "'.$email.'"';
-        $requests = $mysqli -> query($query);
+        $requests = $GLOBALS['mysqli'] -> query($query);
         if (!preg_match("/^[0-9a-zA-Z]+$/",$username)) {
             jsalert("Username: Only letters and numbers allowed"); jsloc("login.php"); sessionClear();}
         else if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
@@ -63,7 +63,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         else if(mysqli_num_rows($requests)<=0){
             $hashedpassword = password_hash($password, PASSWORD_ARGON2ID);
             $query = 'insert into users (username, email, password) values ("'.$username.'","'.$email.'","'.$hashedpassword.'")'; 
-            $mysqli -> query($query);
+            $GLOBALS['mysqli'] -> query($query);
             jsalert("Hi ".$username.", Registration Successful! Now you can login");
             jsloc("login.php"); }
         else {
