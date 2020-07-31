@@ -1,2 +1,5 @@
 # BOSS: Beautiful Open Source Software Blog.
-A blog built using PHP for a internship test.
+## TODO:
+- Fix/Properly sanitize SQL Queries and inputs from GET method.
+- Change Logo (canva)
+- Improve UI (plain and material design)
