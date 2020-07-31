@@ -8,8 +8,7 @@ blogDelete() - delete blog
 */
 include_once 'php/sqlmanager.php';
 function blogDisp(){
-    $query = "select * from posts order by id desc";
-    $requests = $GLOBALS['mysqli'] -> query($query);
+    $requests = exequery("select * from posts order by id desc");
     while ($row=mysqli_fetch_array($requests)) {
         $blog_id=$row['id'];
         $blog_title=$row['title'];
@@ -31,8 +30,7 @@ function blogDisp(){
 
 function blogDispId(){
     $uid = $_SESSION['uid'];
-    $query = "select * from posts where username ='".$uid."'";
-    $requests = $GLOBALS['mysqli'] -> query($query);
+    $requests = exequery("select * from posts where username =?","s",$_SESSION['uid']);
     if(empty($requests)){
         pageMsg("You got no blog post till now! Why dont you try writing one? Click on 'Add' on the top-right corner!");
     }
@@ -83,12 +81,10 @@ function blogAdd(){
             $title = test_input($_POST["title"]);
             $short = test_input($_POST["short"]);
             $content = test_input($_POST["content"]);
-            $query = 'select * from posts where title = "'.$title.'"';
-            $requests = $GLOBALS['mysqli'] -> query($query);
+            $requests = exequery('select * from posts where title = ?','s',$title);
             if(mysqli_num_rows($requests)<=0){
                 $current_date = date("Y-m-d");
-                $query = 'insert into posts (title, body, username, short, created_at) values ("'.$title.'","'.$content.'","'.$uid.'","'.$short.'","'.$current_date.'")'; 
-                $GLOBALS['mysqli'] -> query($query);
+                exequery("insert into posts (title, body, username, short, created_at) values (?,?,?,?,?)",'sssss',$title,$content,$uid,$short,$current_date);
                 jsalert("Hi ".$uid.", Post Successfuly created!");
                 jsloc("blogpanel.php?w=view"); }
             else {
@@ -101,8 +97,7 @@ function blogAdd(){
 function blogEdit($blogId){
     $blogId = test_input($blogId);
     $uid = $_SESSION['uid'];
-    $query = 'select * from posts where id = "'.$blogId.'" and username = "'.$uid.'"';
-    $requests = $GLOBALS['mysqli'] -> query($query);
+    $requests = exequery("select * from posts where id = ? and username = ?","ss",$blogId,$uid);
     $row=mysqli_fetch_array($requests); 
     echo '
     <section>
@@ -128,8 +123,7 @@ function blogEdit($blogId){
             $title = test_input($_POST["title"]);
             $short = test_input($_POST["short"]);
             $content = test_input($_POST["content"]);
-            $query = 'update posts set title="'.$title.'", body="'.$content.'", short="'.$short.'" where id='.$blogId.'';
-            $GLOBALS['mysqli'] -> query($query);
+            exequery('update posts set title=?, body=?, short=? where id=?',"ssss",$title,$content,$short,$blogId);
             jsalert("Hi ".$uid.", Post Successfuly edited!");
             jsloc("blogpanel.php?w=view"); 
         }

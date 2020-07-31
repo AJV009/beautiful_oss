@@ -18,10 +18,8 @@ if($opt=='view'){
     $blogId = $_GET['id'];
     $uid = $_SESSION['uid'];
     $blogId = test_input($blogId);
-    $uid = $_SESSION['uid'];
     // $query = 'delete from posts where id='.$blogId.' AND username='.$uid.' ';
-    $query = 'delete from posts where id='.$blogId.' ';
-    $GLOBALS['mysqli'] -> query($query);
+    exequery('delete from posts where id=?','s',$blogId);
     jsalert("Hi ".$uid.", Post Successfuly deleted!");
     jsloc("blogpanel.php?w=view");
 } else blogDispId();
