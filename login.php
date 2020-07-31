@@ -35,13 +35,7 @@ pageHead('Login');
 pageFoot();
 // LOGIN/SIGNUP LOGIC BOARD 😂
 $username = $email = $password = "";
-function test_input($data) {
-    $data = trim($data);
-    $data = stripslashes($data);
-    $data = htmlspecialchars($data);
-    return $data;
-}
-$mysqli = new mysqli("localhost","root","","boss");
+include_once 'php/sqlmanager.php';
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if( isset( $_POST['signin'] ) ){
         $username = test_input($_POST["username"]);

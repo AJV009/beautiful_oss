@@ -4,8 +4,8 @@ sessionConfig();
 $blogid = $_GET["id"];
 include_once 'php/pagesetup.php';
 include_once 'php/blogpost.php';
+include_once 'php/sqlmanager.php';
 pageHead('Home');
-$mysqli = new mysqli("localhost","root","","boss");
 $query = "select * from posts where id=".$blogid."";
 $requests = $mysqli -> query($query);
 while ($row=mysqli_fetch_array($requests)) {

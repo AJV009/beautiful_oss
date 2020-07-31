@@ -6,8 +6,8 @@ blogAdd() - add blogs
 blogEdit() - edit blog
 blogDelete() - delete blog
 */
+include_once 'php/sqlmanager.php';
 function blogDisp(){
-    $mysqli = new mysqli("localhost","root","","boss");
     $query = "select * from posts order by id desc";
     $requests = $mysqli -> query($query);
     while ($row=mysqli_fetch_array($requests)) {
@@ -30,7 +30,6 @@ function blogDisp(){
 }
 
 function blogDispId(){
-    $mysqli = new mysqli("localhost","root","","boss");
     $uid = $_SESSION['uid'];
     $query = "select * from posts where username ='".$uid."'";
     $requests = $mysqli -> query($query);
@@ -59,7 +58,6 @@ function blogDispId(){
 }
 
 function blogAdd(){
-    $mysqli = new mysqli("localhost","root","","boss");
     $uid = $_SESSION['uid'];
     ?>
     <section>
@@ -80,12 +78,6 @@ function blogAdd(){
     </section>
     <?php
     $title = $short = $description = "";
-    function test_input($data) {
-        $data = trim($data);
-        $data = stripslashes($data);
-        $data = htmlspecialchars($data);
-        return $data;
-    }
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if( isset( $_POST['insertPost'] ) ){
             $title = test_input($_POST["title"]);
@@ -107,14 +99,7 @@ function blogAdd(){
 }
 
 function blogEdit($blogId){
-    function test_input($data) {
-        $data = trim($data);
-        $data = stripslashes($data);
-        $data = htmlspecialchars($data);
-        return $data;
-    }
     $blogId = test_input($blogId);
-    $mysqli = new mysqli("localhost","root","","boss");
     $uid = $_SESSION['uid'];
     $query = 'select * from posts where id = "'.$blogId.'" and username = "'.$uid.'"';
     $requests = $mysqli -> query($query);
