@@ -1,11 +1,6 @@
 <?php
-/*
-pageHead($t,$log='Login') - Page Header!
-pageFoot() - Page Footer!
-jsalert($msg) - create alert
-jsloc($loc) - change locations
-*/
 function pageHead($t) {
+	error_reporting(0);
 	$title = 'BOSS: '.$t;
 	$log = 'Login';
 	$blogvar = '';
@@ -18,7 +13,6 @@ function pageHead($t) {
 	}
     $pH1 = 'Beautiful Open Source Software Blogs!';
     echo '
-
 	<html>
 	<head>
 	<title>'.$title.'</title>
@@ -46,7 +40,6 @@ function pageHead($t) {
 	</section>
     ';
 }
-
 function pageMsg($msg){
 	echo '
 	<div class="w3-container w3-card-4 w3-pale-green w3-margin" style="margin-left: 10%; margin-right: 10%">
@@ -71,11 +64,5 @@ function pageFoot(){
 
     ';
 }
-function jsalert($msg){
-    echo '<script> alert(" '.$msg.' "); </script>';
-}
-function jsloc($uri){
-	header("location: $uri");
-    // echo '<script> window.location.replace("'.$uri.'"); </script>';
-}
-?>
+function jsalert($msg){ echo '<script> alert(" '.$msg.' "); </script>'; }
+function jsloc($uri){ header("location: $uri"); }

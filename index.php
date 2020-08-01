@@ -6,4 +6,3 @@ include_once 'php/blogpost.php';
 pageHead('Home');
 blogDisp();
 pageFoot();
-?>

@@ -35,21 +35,14 @@ pageHead('Login');
 pageFoot();
 // LOGIN/SIGNUP LOGIC BOARD 😂
 $username = $email = $password = "";
-function test_input($data) {
-    $data = trim($data);
-    $data = stripslashes($data);
-    $data = htmlspecialchars($data);
-    return $data;
-}
-$mysqli = new mysqli("localhost","root","","boss");
+include_once 'php/sqlmanager.php';
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if( isset( $_POST['signin'] ) ){
         $username = test_input($_POST["username"]);
         $password = test_input($_POST["password"]);
-        $query = 'select * from users where username = "'.$username.'"';
-        $requests = $mysqli -> query($query);
+        $requests = exequery('select * from users where username = ?','s',$username);
         $dbrow = mysqli_fetch_array($requests);
-        if(password_verify($password,$dbrow['password'])){
+        if(password_verify($username+$password,$dbrow['password'])){
             $_SESSION['uid'] = $username;
             jsalert("Logged in successfully!");
             jsloc("index.php");
@@ -58,8 +51,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $username = test_input($_POST["username"]);
         $email = test_input($_POST["email"]);
         $password = test_input($_POST["password"]);
-        $query = 'select * from users where username = "'.$username.'" OR email = "'.$email.'"';
-        $requests = $mysqli -> query($query);
+        $requests = exequery('select * from users where username = ? OR email = ?','ss',$username,$email);
         if (!preg_match("/^[0-9a-zA-Z]+$/",$username)) {
             jsalert("Username: Only letters and numbers allowed"); jsloc("login.php"); sessionClear();}
         else if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
@@ -67,9 +59,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         else if (!preg_match("/^((?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[\W_]).{6,50})$/",$password)) {
             jsalert("Password: 1 Lower and Upper case character, 1 number, 1 special character and must be at least 6 characters and at most 50"); jsloc("login.php"); sessionClear();}
         else if(mysqli_num_rows($requests)<=0){
-            $hashedpassword = password_hash($password, PASSWORD_ARGON2ID);
-            $query = 'insert into users (username, email, password) values ("'.$username.'","'.$email.'","'.$hashedpassword.'")'; 
-            $mysqli -> query($query);
+            jsalert($username+$password);
+            $hashedpassword = password_hash($username+$password, PASSWORD_ARGON2ID);
+            exequery('insert into users (username, email, password) values (?,?,?)','sss',$username,$email,$hashedpassword);
             jsalert("Hi ".$username.", Registration Successful! Now you can login");
             jsloc("login.php"); }
         else {
