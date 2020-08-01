@@ -2,6 +2,7 @@
 include_once 'php/sqlmanager.php';
 function blogDisp(){
     $requests = exequery("select * from posts order by id desc");
+    if(mysqli_num_rows($requests)<=0) pageMsg("😟 There arent any blogs here!");
     while ($row=mysqli_fetch_array($requests)) {
         $blog_id=$row['id'];
         $blog_title=$row['title'];
@@ -12,8 +13,8 @@ function blogDisp(){
         <section>
             <a href="article.php?id='.$blog_id.'">
             <div class="w3-container w3-blue w3-card-4 w3-margin w3-round-large">
-                <h3 style="display: inline;">'.$blog_title.' </h3><h6 style="display: inline;"> by - '.$blog_author.' on '.$blog_created.'</h6>
-                <h5>'.$blog_short.'</h5>
+                <h3 style="display: inline;">🤖'.$blog_title.' </h3><h6 style="display: inline;"> by - ✍'.$blog_author.' on 📅'.$blog_created.'</h6>
+                <h5>🔰'.$blog_short.'</h5>
             </div>
             <a>
         </section>
@@ -23,7 +24,7 @@ function blogDisp(){
 function blogDispId(){
     $uid = $_SESSION['uid'];
     $requests = exequery("select * from posts where username =?","s",$_SESSION['uid']);
-    if(empty($requests)) pageMsg("You got no blog post till now! Why dont you try writing one? Click on 'Add' on the top-right corner!");
+    if(mysqli_num_rows($requests)<=0) pageMsg("😓 You got no blog post till now! Why dont you try writing one? 🤷‍♀️🤷‍♂️ Click on 'Add' on the top-right corner! 💡");
     else {
         while ($row=mysqli_fetch_array($requests)) {
             $blog_id=$row['id'];
@@ -33,8 +34,8 @@ function blogDispId(){
             echo '
             <section>
                 <div class="w3-container w3-light-green w3-card-4 w3-margin w3-round-large">
-                    <h2 style="display: inline;">'.$blog_title.' </h2><h5 style="display: inline;"> created on '.$blog_created.'</h5>
-                    <h5>'.$blog_short.'</h5>
+                    <h2 style="display: inline;">🤖'.$blog_title.' </h2><h5 style="display: inline;"> created on 📅'.$blog_created.'</h5>
+                    <h5>🔰'.$blog_short.'</h5>
                     <a href= "article.php?id='.$blog_id.'"  class="w3-btn w3-green w3-margin">View</a>
                     <a href= "blogpanel.php?w=edit&id='.$blog_id.'"  class="w3-btn w3-green w3-margin">Edit</a>
                     <a href= "blogpanel.php?w=delete&id='.$blog_id.'"  class="w3-btn w3-green w3-margin">Delete</a>
@@ -52,11 +53,11 @@ function blogAdd(){
 			<div class="w3-card-4 w3-round-xxlarge w3-sand w3-center" style="margin-left:10%; margin-right:10%">
  				<h4>Add your new blog post!</h4>
  				<form class="w3-container" method="post" action=" ">
-                    <h4 class="w3-left w3-margin-left">Title</h4>
+                    <h4 class="w3-left w3-margin-left">🤖Title</h4>
                         <input class="w3-input w3-border w3-round-large" type="text" name="title" required>
-                    <h4 class="w3-left w3-margin-left">Short Description</h4>
+                    <h4 class="w3-left w3-margin-left">🔰Short Description</h4>
                         <input class="w3-input w3-border w3-round-large" type="text" name="short" required>
-                    <h4 class="w3-left w3-margin-left">Main Content</h4>
+                    <h4 class="w3-left w3-margin-left">📝Main Content</h4>
                         <textarea class="w3-input w3-border w3-round-large" type="textarea" name="content" required></textarea>
     				<input class="w3-btn w3-green w3-round-xxlarge w3-margin" type="submit" value="Make Post" name="insertPost">
                  </form>
@@ -95,11 +96,11 @@ function blogEdit($blogId){
 			<div class="w3-card-4 w3-round-xxlarge w3-sand w3-center" style="margin-left:10%; margin-right:10%">
  				<h4>Edit your blog post!</h4>
  				<form class="w3-container" method="post" action=" ">
-                    <h4 class="w3-left w3-margin-left">Title</h4>
+                    <h4 class="w3-left w3-margin-left">🤖Title</h4>
                         <input class="w3-input w3-border w3-round-large" type="text" value="'.$row['title'].'" name="title" required>
-                    <h4 class="w3-left w3-margin-left">Short Description</h4>
+                    <h4 class="w3-left w3-margin-left">🔰Short Description</h4>
                         <input class="w3-input w3-border w3-round-large" type="text" value="'.$row['short'].'" name="short" required>
-                    <h4 class="w3-left w3-margin-left">Main Content</h4>
+                    <h4 class="w3-left w3-margin-left">📝Main Content</h4>
                         <textarea class="w3-input w3-border w3-round-large" type="textarea" name="content" required>'.$row['body'].'</textarea>
     				<input class="w3-btn w3-green w3-round-xxlarge w3-margin" type="submit" value="Update Post" name="insertPost">
                  </form>

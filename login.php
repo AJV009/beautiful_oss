@@ -8,7 +8,7 @@ pageHead('Login');
 <section>
         <div class="w3-container " style="margin-top:1%">
 			<div class="w3-card-4 w3-round-xxlarge w3-sand w3-center" style="margin-left:30%; margin-right:30%">
-				<h4><br><--- Log in ---></h4>
+				<h4><br>👉 Log in </h4>
 				(Only if you already have an account)
 				<br>
 				<form class="w3-container" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
@@ -16,8 +16,8 @@ pageHead('Login');
     				<h4 class="w3-left w3-margin-left">Password</h4><input class="w3-input w3-border w3-round-xxlarge" type="password" name="password" required>
     				<input class="w3-btn w3-green w3-round-xxlarge w3-margin" type="submit" value="submit" name="signin">
  				</form>
- 				<h3>OR</h3>
- 				<h4><--- Sign up ---></h4>
+ 				<h3> OR </h3>
+ 				<h4>📃 Sign up 🤩</h4>
  				(For a new account)<br>
  				<form class="w3-container" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
                     <h4 style="display: inline;" class="w3-left w3-margin-left">Username</h4><h6 >Only letters and numbers allowed</h6>
