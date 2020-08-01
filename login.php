@@ -14,7 +14,7 @@ pageHead('Login');
 				<form class="w3-container" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
  					<h4 class="w3-left w3-margin-left">Username</h4><input class="w3-input w3-border w3-round-xxlarge" type="text" name="username" required>
     				<h4 class="w3-left w3-margin-left">Password</h4><input class="w3-input w3-border w3-round-xxlarge" type="password" name="password" required>
-    				<input class="w3-btn w3-green w3-round-xxlarge w3-margin" type="submit" value="submit" name="signin">
+    				<input class="w3-btn w3-green w3-round-xxlarge w3-margin" type="submit" value="Login ⚡" name="signin">
  				</form>
  				<h3> OR </h3>
  				<h4>📃 Sign up 🤩</h4>
@@ -26,7 +26,7 @@ pageHead('Login');
                         <input class="w3-input w3-border w3-round-xxlarge" name="email" required>
                     <h4 style="display: inline;" class="w3-left w3-margin-left">Password</h4><h6 >1 Lower and Upper case character, 1 number, 1 special character and at least 6 to 50 characters long</h6>
                         <input class="w3-input w3-border w3-round-xxlarge" type="password" name="password" required>
-    				<input class="w3-btn w3-green w3-round-xxlarge w3-margin" type="submit" value="submit" name="signup">
+    				<input class="w3-btn w3-green w3-round-xxlarge w3-margin" type="submit" value="Signup 😎" name="signup">
  				</form>
 			</div>
         </div>

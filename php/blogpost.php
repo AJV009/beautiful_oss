@@ -1,8 +1,9 @@
 <?php
 include_once 'php/sqlmanager.php';
-function blogDisp(){
-    $requests = exequery("select * from posts order by id desc");
-    if(mysqli_num_rows($requests)<=0) pageMsg("😟 There arent any blogs here!");
+function blogDisp($except=0){
+    if($except!=0){ $requests = exequery("select * from posts where not (id = ?) order by id desc ","s",$except); return 0;}
+    else $requests = exequery("select * from posts order by id desc");
+    if(mysqli_num_rows($requests)<=0) pageMsg("😟 There arent any new blogs here!");
     while ($row=mysqli_fetch_array($requests)) {
         $blog_id=$row['id'];
         $blog_title=$row['title'];
@@ -51,7 +52,7 @@ function blogAdd(){
     <section>
         <div class="w3-container " style="margin-top:1%">
 			<div class="w3-card-4 w3-round-xxlarge w3-sand w3-center" style="margin-left:10%; margin-right:10%">
- 				<h4>Add your new blog post!</h4>
+ 				<h4>📝⌨ Add your new blog post! 💻📰</h4>
  				<form class="w3-container" method="post" action=" ">
                     <h4 class="w3-left w3-margin-left">🤖Title</h4>
                         <input class="w3-input w3-border w3-round-large" type="text" name="title" required>
@@ -59,7 +60,7 @@ function blogAdd(){
                         <input class="w3-input w3-border w3-round-large" type="text" name="short" required>
                     <h4 class="w3-left w3-margin-left">📝Main Content</h4>
                         <textarea class="w3-input w3-border w3-round-large" type="textarea" name="content" required></textarea>
-    				<input class="w3-btn w3-green w3-round-xxlarge w3-margin" type="submit" value="Make Post" name="insertPost">
+    				<input class="w3-btn w3-green w3-round-xxlarge w3-margin" type="submit" value="⚡⚡⚡ Make Post ⚡⚡⚡" name="insertPost">
                  </form>
             </div>
         </div>

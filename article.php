@@ -19,11 +19,11 @@ while ($row=mysqli_fetch_array($requests)) {
         <div class="w3-container w3-yellow w3-card-4 w3-margin w3-round-large">
             <h2 style="display: inline;">🤖'.$blog_title.' </h2><h5 style="display: inline;"> by -📝'.$blog_author.' on 📅'.$blog_created.'</h5>
             <h5>🔰'.$blog_short.'</h5>
-            <h3>📝'.$blog_body.'<h3>
+            <h4>📝'.$blog_body.'<h4>
         </div>
     </section>
     ';
 }
 pageMsg('Other Interesting Blogs 🗽');
-blogDisp();
+blogDisp($blogid);
 pageFoot();

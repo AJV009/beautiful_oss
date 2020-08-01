@@ -7,8 +7,8 @@ function pageHead($t) {
 	if(isset($_SESSION['uid'])){
 		$log = 'Logout';
 		$blogvar = '
-				<a href="blogpanel.php?w=add" class="w3-bar-item w3-btn w3-mobile w3-right w3-hover-pale-green">Add</a>
-				<a href="blogpanel.php?w=view" class="w3-bar-item w3-btn w3-mobile w3-right w3-hover-pale-green">View</a>
+				<a href="blogpanel.php?w=add" class="w3-bar-item w3-btn w3-mobile w3-right w3-hover-pale-green">➕ Add new Posts!</a>
+				<a href="blogpanel.php?w=view" class="w3-bar-item w3-btn w3-mobile w3-right w3-hover-pale-green">📖 View My Posts</a>
 		';
 	}
     $pH1 = '💪😎 BOSS: Beautiful Open Source Software! ⚡⚡⚡';
@@ -28,8 +28,8 @@ function pageHead($t) {
 			<div class="w3-top w3-container w3-teal w3-card-4" align=center style="margin-bottom: 500%;">
 				<h1 style="display: inline;">'.$pH1.'</h1>
 				<div class="w3-bar w3-green w3-card-4">
-					<a href="index.php" class="w3-bar-item w3-btn w3-mobile w3-hover-pale-green">Home</a>
-					<a href="login.php" class="w3-bar-item w3-btn w3-mobile w3-right w3-hover-pale-green">'.$log.'</a>
+					<a href="index.php" class="w3-bar-item w3-btn w3-mobile w3-hover-pale-green">🏠 Home</a>
+					<a href="login.php" class="w3-bar-item w3-btn w3-mobile w3-right w3-hover-pale-green">👥 '.$log.'</a>
 					'.$blogvar.'
 				</div>
 			</div>
