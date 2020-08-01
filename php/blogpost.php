@@ -99,6 +99,9 @@ function blogEdit($blogId){
     $uid = $_SESSION['uid'];
     $requests = exequery("select * from posts where id = ? and username = ?","ss",$blogId,$uid);
     $row=mysqli_fetch_array($requests); 
+    if(empty($row)){
+        jsloc("index.php");
+    }
     echo '
     <section>
         <div class="w3-container " style="margin-top:1%">
@@ -123,7 +126,7 @@ function blogEdit($blogId){
             $title = test_input($_POST["title"]);
             $short = test_input($_POST["short"]);
             $content = test_input($_POST["content"]);
-            exequery('update posts set title=?, body=?, short=? where id=?',"ssss",$title,$content,$short,$blogId);
+            exequery('update posts set title=?, body=?, short=? where id=? and username=?',"sssss",$title,$content,$short,$blogId,$uid);
             jsalert("Hi ".$uid.", Post Successfuly edited!");
             jsloc("blogpanel.php?w=view"); 
         }
