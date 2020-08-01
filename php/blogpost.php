@@ -117,8 +117,12 @@ function blogEdit($blogId){
     $mysqli = new mysqli("localhost","root","","boss");
     $uid = $_SESSION['uid'];
     $query = 'select * from posts where id = "'.$blogId.'" and username = "'.$uid.'"';
-    $requests = $mysqli -> query($query);
+    $requests = $mysqli -> query($query);   
+    print_r($requests);
     $row=mysqli_fetch_array($requests); 
+    if(empty($row)){
+        jsloc("index.php");
+    }
     echo '
     <section>
         <div class="w3-container " style="margin-top:1%">
@@ -143,7 +147,7 @@ function blogEdit($blogId){
             $title = test_input($_POST["title"]);
             $short = test_input($_POST["short"]);
             $content = test_input($_POST["content"]);
-            $query = 'update posts set title="'.$title.'", body="'.$content.'", short="'.$short.'" where id='.$blogId.'';
+            $query = 'update posts set title="'.$title.'", body="'.$content.'", short="'.$short.'" where id='.$blogId.' and username="'.$uid.'"';
             $mysqli -> query($query);
             jsalert("Hi ".$uid.", Post Successfuly edited!");
             jsloc("blogpanel.php?w=view"); 

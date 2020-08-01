@@ -75,6 +75,7 @@ function jsalert($msg){
     echo '<script> alert(" '.$msg.' "); </script>';
 }
 function jsloc($uri){
-    echo '<script> window.location.replace("'.$uri.'"); </script>';
+	header("location: $uri");
+    // echo '<script> window.location.replace("'.$uri.'"); </script>';
 }
 ?>
