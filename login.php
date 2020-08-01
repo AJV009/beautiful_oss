@@ -55,7 +55,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         else if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
             jsalert("Email: Invalid email format"); jsloc("login.php"); }
         else if (!preg_match("/^((?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[\W_]).{6,50})$/",$password)) {
-            jsalert("Password: 1 Lower and Upper case character, 1 number, 1 special character and must be at least 6 characters and at most 50"); jsloc("login.php");}
+            jsalert("Password: 1 Lower and Upper case character, 1 number, 1 special character and must be at least 6 characters and at most 50");}
         else if(mysqli_num_rows($requests)<=0){
             $hashedpassword = password_hash($pass, PASSWORD_ARGON2ID);
             exequery('insert into users (username, email, password) values (?,?,?)','sss',$username,$email,$hashedpassword);
