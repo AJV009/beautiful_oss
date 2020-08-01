@@ -65,4 +65,5 @@ function pageFoot(){
     ';
 }
 function jsalert($msg){ echo '<script> alert(" '.$msg.' "); </script>'; }
-function jsloc($uri){ header("location: $uri"); }
+function jsloc($uri){ echo '<script> window.location.replace("'.$uri.'") </script>'; }
+function phploc($uri){ header("location: $uri"); }

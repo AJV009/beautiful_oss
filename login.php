@@ -1,8 +1,8 @@
 <?php
 include_once 'php/sessionmanager.php';
-sessionClear();
-sessionConfig();
+// sessionClear();
 include_once 'php/pagesetup.php';
+if(isset($_SESSION['uid'])) sessionClear();
 pageHead('Login');
 ?>
 <section>
@@ -33,39 +33,36 @@ pageHead('Login');
 </section>
 <?php
 pageFoot();
-// LOGIN/SIGNUP LOGIC BOARD 😂
 $username = $email = $password = "";
 include_once 'php/sqlmanager.php';
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $username = test_input($_POST["username"]);
+    $password = test_input($_POST["password"]);
+    $pass = "$username"."$password";
     if( isset( $_POST['signin'] ) ){
-        $username = test_input($_POST["username"]);
-        $password = test_input($_POST["password"]);
         $requests = exequery('select * from users where username = ?','s',$username);
         $dbrow = mysqli_fetch_array($requests);
-        if(password_verify($username+$password,$dbrow['password'])){
+        if(password_verify($pass,$dbrow['password'])){
             $_SESSION['uid'] = $username;
             jsalert("Logged in successfully!");
             jsloc("index.php");
-        } else { jsalert("Incorrect password/username, please try again!"); jsloc("index.php"); sessionClear();} }
+        } else { jsalert("Incorrect password/username, please try again!"); jsloc("login.php"); sessionClear();} }
     if( isset( $_POST['signup'] ) ){
-        $username = test_input($_POST["username"]);
         $email = test_input($_POST["email"]);
-        $password = test_input($_POST["password"]);
         $requests = exequery('select * from users where username = ? OR email = ?','ss',$username,$email);
         if (!preg_match("/^[0-9a-zA-Z]+$/",$username)) {
-            jsalert("Username: Only letters and numbers allowed"); jsloc("login.php"); sessionClear();}
+            jsalert("Username: Only letters and numbers allowed"); jsloc("login.php");}
         else if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
             jsalert("Email: Invalid email format"); jsloc("login.php"); }
         else if (!preg_match("/^((?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[\W_]).{6,50})$/",$password)) {
-            jsalert("Password: 1 Lower and Upper case character, 1 number, 1 special character and must be at least 6 characters and at most 50"); jsloc("login.php"); sessionClear();}
+            jsalert("Password: 1 Lower and Upper case character, 1 number, 1 special character and must be at least 6 characters and at most 50"); jsloc("login.php");}
         else if(mysqli_num_rows($requests)<=0){
-            jsalert($username+$password);
-            $hashedpassword = password_hash($username+$password, PASSWORD_ARGON2ID);
+            $hashedpassword = password_hash($pass, PASSWORD_ARGON2ID);
             exequery('insert into users (username, email, password) values (?,?,?)','sss',$username,$email,$hashedpassword);
             jsalert("Hi ".$username.", Registration Successful! Now you can login");
             jsloc("login.php"); }
         else {
-            jsalert("Username/Email already existing!"); jsloc("login.php"); sessionClear();
+            jsalert("Username/Email already existing!"); jsloc("login.php");
         }
     }
 }

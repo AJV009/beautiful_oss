@@ -100,7 +100,7 @@ function blogEdit($blogId){
                     <h4 class="w3-left w3-margin-left">Short Description</h4>
                         <input class="w3-input w3-border w3-round-large" type="text" value="'.$row['short'].'" name="short" required>
                     <h4 class="w3-left w3-margin-left">Main Content</h4>
-                        <textarea class="w3-input w3-border w3-round-large" type="textarea" name="content" required>"'.$row['body'].'"</textarea>
+                        <textarea class="w3-input w3-border w3-round-large" type="textarea" name="content" required>'.$row['body'].'</textarea>
     				<input class="w3-btn w3-green w3-round-xxlarge w3-margin" type="submit" value="Update Post" name="insertPost">
                  </form>
             </div>
