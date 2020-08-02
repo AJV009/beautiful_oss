@@ -66,7 +66,7 @@ function blogAdd(){
         </div>
     </section>';
     $title = $short = $description = "";
-    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    if ($_SERVER["REQUEST_METHOD"] == "POST" & anticsrf(1)) {
         if( isset( $_POST['insertPost'] ) ){
             $title = test_input($_POST["title"]);
             $short = test_input($_POST["short"]);
@@ -110,7 +110,7 @@ function blogEdit($blogId){
     </section>
     ';
     $title = $short = $description = "";
-    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    if ($_SERVER["REQUEST_METHOD"] == "POST" & anticsrf(1)) {
         if( isset( $_POST['insertPost'] ) ){
             $title = test_input($_POST["title"]);
             $short = test_input($_POST["short"]);

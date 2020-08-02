@@ -1,7 +1,9 @@
 <?php
 include_once 'php/sessionmanager.php';
-// sessionClear();
+include_once 'php/sqlmanager.php';
 include_once 'php/pagesetup.php';
+include_once 'php/csrf.php';
+anticsrf(0);
 if(isset($_SESSION['uid'])) sessionClear();
 pageHead('Login');
 ?>
@@ -34,8 +36,7 @@ pageHead('Login');
 <?php
 pageFoot();
 $username = $email = $password = "";
-include_once 'php/sqlmanager.php';
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
+if ($_SERVER["REQUEST_METHOD"] == "POST" & anticsrf(1)) {
     $username = test_input($_POST["username"]);
     $password = test_input($_POST["password"]);
     $pass = "$username"."$password";
