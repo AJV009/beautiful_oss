@@ -12,7 +12,12 @@ function pageHead($t) {
 		';
 	}
     $pH1 = '💪😎 BOSS: Beautiful Open Source Software! ⚡⚡⚡';
-    echo '
+	echo '
+	<style> 
+	.error {color: #FF0000;} 
+	.success {color: #00F2FF;} 
+	.msg {color: #FF0000;} 
+	</style>
 	<html>
 	<head>
 	<title>'.$title.'</title>

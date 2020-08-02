@@ -12,6 +12,6 @@ function exequery($query,...$qargs){
         $stmt = $mysqli->prepare($query);
         $stmt->bind_param(...$qargs);
         $stmt->execute();
-        if(preg_match("(?i)#select#",$query)) return $stmt->get_result();
+        if(preg_match("#select#i",$query)) return $stmt->get_result();
     }
 }
