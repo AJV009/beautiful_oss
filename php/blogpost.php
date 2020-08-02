@@ -1,7 +1,7 @@
 <?php
 include_once 'php/sqlmanager.php';
 function blogDisp($except=0){
-    if($except!=0){ $requests = exequery("select * from posts where not (id = ?) order by id desc ","s",$except); return 0;}
+    if($except!=0){ $requests = exequery("select * from posts where not (id = ?) order by id desc ","s",$except);}
     else $requests = exequery("select * from posts order by id desc");
     if(mysqli_num_rows($requests)<=0) pageMsg("😟 There arent any new blogs here!");
     while ($row=mysqli_fetch_array($requests)) {
@@ -66,7 +66,7 @@ function blogAdd(){
         </div>
     </section>';
     $title = $short = $description = "";
-    if ($_SERVER["REQUEST_METHOD"] == "POST" & anticsrf(1)) {
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if( isset( $_POST['insertPost'] ) ){
             $title = test_input($_POST["title"]);
             $short = test_input($_POST["short"]);
@@ -110,7 +110,7 @@ function blogEdit($blogId){
     </section>
     ';
     $title = $short = $description = "";
-    if ($_SERVER["REQUEST_METHOD"] == "POST" & anticsrf(1)) {
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if( isset( $_POST['insertPost'] ) ){
             $title = test_input($_POST["title"]);
             $short = test_input($_POST["short"]);

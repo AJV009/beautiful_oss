@@ -4,7 +4,6 @@ include_once 'php/sessionmanager.php';
 include_once 'php/pagesetup.php';
 include_once 'php/blogpost.php';
 include_once 'php/sqlmanager.php';
-include_once 'php/csrf.php';
 anticsrf(0);
 sessionCheck();
 pageHead('Home');
@@ -21,7 +20,6 @@ if($opt=='view'){
     $blogId = test_input($blogId);
     // $query = 'delete from posts where id='.$blogId.' AND username='.$uid.' ';
     exequery('delete from posts where id=? and username=?','ss',$blogId,$uid);
-    jsalert("Hi ".$uid.", Post Successfuly deleted!");
-    jsloc("blogpanel.php?w=view");
+    phploc("blogpanel.php?w=view");
 } else blogDispId();
 pageFoot();

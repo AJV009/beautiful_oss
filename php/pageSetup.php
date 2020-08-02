@@ -18,8 +18,8 @@ function pageHead($t) {
 	echo '
 	<style> 
 	.error {color: #FF0000;} 
-	.success {color: #00F2FF;} 
-	.msg {color: #FF0000;} 
+	.success {color: #fffb00;} 
+	.msg {color: #FF0000;}
 	</style>
 	<html>
 	<head>

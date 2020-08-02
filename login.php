@@ -33,7 +33,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             exequery('insert into users (username, email, password) values (?,?,?)','sss',$username,$email,$hashedpassword);
             $DONE = "Hi ".$username.", Registration Successful! Now you can login"; }
         else {
-            $ER = "Username/Email already existing!"; jsloc("login.php");
+            $ER = "Username/Email already existing!";
         }
     }
 }
@@ -41,6 +41,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <section>
         <div class="w3-container " style="margin-top:1%">
 			<div class="w3-card-4 w3-round-xxlarge w3-sand w3-center" style="margin-left:30%; margin-right:30%">
+            <p class="error"><?php echo $DONE;?></p>
 				<h4><br>👉 Log in </h4>
 				(Only if you already have an account)
 				<br>
@@ -48,7 +49,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
  					<h4 class="w3-left w3-margin-left">Username</h4><input class="w3-input w3-border w3-round-xxlarge" type="text" name="username" required>
     				<h4 class="w3-left w3-margin-left">Password</h4><input class="w3-input w3-border w3-round-xxlarge" type="password" name="password" required>
     				<input class="w3-btn w3-green w3-round-xxlarge w3-margin" type="submit" value="Login ⚡" name="signin">
-                    <p class="error">* <?php echo $LER;?></p>
+                    <p class="error"><?php echo $LER;?></p>
  				</form>
  				<h3> OR </h3>
  				<h4>📃 Sign up 🤩</h4>
