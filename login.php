@@ -1,8 +1,11 @@
 <?php
+error_reporting(0);
 include_once 'php/sessionmanager.php';
 include_once 'php/sqlmanager.php';
 include_once 'php/pagesetup.php';
-if(isset($_SESSION['uid'])) sessionClear();
+if(isset($_GET['w']) && $_GET['w']==$_SESSION['lval']) session_unset();
+else if(isset($_SESSION['uid'])) phploc("index.php");
+else session_unset();
 pageHead('Login');
 $username = $email = $password = $ER = "";
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -13,7 +16,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $requests = exequery('select * from users where username = ?','s',$username);
         $dbrow = mysqli_fetch_array($requests);
         if(password_verify($pass,$dbrow['password'])){
-            $_SESSION['uid'] = $username;
+            $_SESSION['loggedin'] = TRUE; $_SESSION['uid'] = $username;
             phploc("index.php");
         } else { $LER = "Incorrect password/username, please try again!"; jsloc("login.php"); sessionClear();} }
     if( isset( $_POST['signup'] ) ){

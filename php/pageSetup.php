@@ -1,11 +1,14 @@
 <?php
 function pageHead($t) {
-	error_reporting(0);
 	$title = 'BOSS: '.$t;
 	$log = 'Login';
 	$blogvar = '';
+	$logbut ='';
 	if(isset($_SESSION['uid'])){
 		$log = 'Logout';
+		$_SESSION['lval'] = bin2hex(random_bytes(16));
+		$lval = $_SESSION['lval'];
+		$logbut = '?w='.$lval.'';
 		$blogvar = '
 				<a href="blogpanel.php?w=add" class="w3-bar-item w3-btn w3-mobile w3-right w3-hover-pale-green">➕ Add new Posts!</a>
 				<a href="blogpanel.php?w=view" class="w3-bar-item w3-btn w3-mobile w3-right w3-hover-pale-green">📖 View My Posts</a>
@@ -34,7 +37,7 @@ function pageHead($t) {
 				<h1 style="display: inline;">'.$pH1.'</h1>
 				<div class="w3-bar w3-green w3-card-4">
 					<a href="index.php" class="w3-bar-item w3-btn w3-mobile w3-hover-pale-green">🏠 Home</a>
-					<a href="login.php" class="w3-bar-item w3-btn w3-mobile w3-right w3-hover-pale-green">👥 '.$log.'</a>
+					<a href="login.php'.$logbut.'" class="w3-bar-item w3-btn w3-mobile w3-right w3-hover-pale-green">👥 '.$log.'</a>
 					'.$blogvar.'
 				</div>
 			</div>
