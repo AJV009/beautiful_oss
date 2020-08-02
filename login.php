@@ -4,7 +4,6 @@ include_once 'php/sqlmanager.php';
 include_once 'php/pagesetup.php';
 if(isset($_SESSION['uid'])) sessionClear();
 pageHead('Login');
-
 $username = $email = $password = $ER = "";
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = $_POST["username"];
