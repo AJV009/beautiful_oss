@@ -3,8 +3,9 @@ include_once 'php/sessionmanager.php';
 include_once 'php/sqlmanager.php';
 include_once 'php/pagesetup.php';
 include_once 'php/csrf.php';
-anticsrf(0);
 if(isset($_SESSION['uid'])) sessionClear();
+unset($_SESSION['token']);
+$token = anticsrf(0);
 pageHead('Login');
 ?>
 <section>
@@ -16,7 +17,7 @@ pageHead('Login');
 				<form class="w3-container" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
  					<h4 class="w3-left w3-margin-left">Username</h4><input class="w3-input w3-border w3-round-xxlarge" type="text" name="username" required>
     				<h4 class="w3-left w3-margin-left">Password</h4><input class="w3-input w3-border w3-round-xxlarge" type="password" name="password" required>
-                    <input type="hidden" name="tkn" value="<?php $token ?>">
+                    <input type="hidden" name="tkn" value="<?php echo $token; ?>">
     				<input class="w3-btn w3-green w3-round-xxlarge w3-margin" type="submit" value="Login ⚡" name="signin">
  				</form>
  				<h3> OR </h3>
@@ -29,7 +30,7 @@ pageHead('Login');
                         <input class="w3-input w3-border w3-round-xxlarge" name="email" required>
                     <h4 style="display: inline;" class="w3-left w3-margin-left">Password</h4><h6 >1 Lower and Upper case character, 1 number, 1 special character and at least 6 to 50 characters long</h6>
                         <input class="w3-input w3-border w3-round-xxlarge" type="password" name="password" required>
-                        <input type="hidden" name="tkn" value="<?php $token ?>">
+                        <input type="hidden" name="tkn" value="<?php echo $token; ?>">
     				<input class="w3-btn w3-green w3-round-xxlarge w3-margin" type="submit" value="Signup 😎" name="signup">
  				</form>
 			</div>
@@ -38,7 +39,7 @@ pageHead('Login');
 <?php
 pageFoot();
 $username = $email = $password = "";
-if ($_SERVER["REQUEST_METHOD"] == "POST" & anticsrf(1, $post)) {
+if ($_SERVER["REQUEST_METHOD"] == "POST" && ($_POST["tkn"] == $token)) {
     $username = test_input($_POST["username"]);
     $password = test_input($_POST["password"]);
     $pass = "$username"."$password";
@@ -68,5 +69,5 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" & anticsrf(1, $post)) {
             jsalert("Username/Email already existing!"); jsloc("login.php");
         }
     }
-}
+} else jsalert("FAILED!");;
 ?>
