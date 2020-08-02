@@ -4,7 +4,6 @@ include_once 'php/sessionmanager.php';
 include_once 'php/pagesetup.php';
 include_once 'php/blogpost.php';
 include_once 'php/sqlmanager.php';
-anticsrf(0);
 sessionCheck();
 pageHead('Home');
 $opt = $_GET['w'];
