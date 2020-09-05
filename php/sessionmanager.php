@@ -9,3 +9,9 @@ function sessionTime(){
     $_SESSION['lastact'] = $time;
 }
 sessionTime();
+function ck_set() {
+    
+}
+function ck_unset() {
+
+}
