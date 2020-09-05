@@ -1,6 +1,6 @@
 <?php
 session_start();
-if(isset($_COOKIE['timeboss'])) $_SESSION['uid'] = $_COOKIE['timeboss'];
+if(isset($_COOKIE['bosstime'])) $_SESSION['uid'] = $_COOKIE['bosstime'];
 
 function sessionClear(){
     session_unset(); session_destroy();

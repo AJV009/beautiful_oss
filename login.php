@@ -3,9 +3,9 @@ error_reporting(0);
 include_once 'php/sessionmanager.php';
 include_once 'php/sqlmanager.php';
 include_once 'php/pagesetup.php';
-if(isset($_GET['w']) && $_GET['w']==$_SESSION['lval']) session_unset();
+if(isset($_GET['w']) && $_GET['w']==$_SESSION['lval']) sessionClear();
 else if(isset($_SESSION['uid'])) phploc("index.php");
-else session_unset();
+else sessionClear();
 pageHead('Login');
 $username = $email = $password = $ER = "";
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
