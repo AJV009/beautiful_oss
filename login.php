@@ -17,6 +17,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $dbrow = mysqli_fetch_array($requests);
         if(password_verify($pass,$dbrow['password'])){
             $_SESSION['loggedin'] = TRUE; $_SESSION['uid'] = $username;
+            if(isset($_POST["remember"])) ck_set();
             phploc("index.php");
         } else { $LER = "Incorrect password/username, please try again!"; jsloc("login.php"); sessionClear();} }
     if( isset( $_POST['signup'] ) ){
@@ -48,7 +49,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 				<form class="w3-container" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
  					<h4 class="w3-left w3-margin-left">Username</h4><input class="w3-input w3-border w3-round-xxlarge" type="text" name="username" required>
     				<h4 class="w3-left w3-margin-left">Password</h4><input class="w3-input w3-border w3-round-xxlarge" type="password" name="password" required>
-    				<input class="w3-btn w3-green w3-round-xxlarge w3-margin" type="submit" value="Login ⚡" name="signin">
+                    <input type="checkbox" id="remember" name="remember" value="rem"> <label for="remember"> Remember me </label> <br>
+                    <input class="w3-btn w3-green w3-round-xxlarge w3-margin" type="submit" value="Login ⚡" name="signin">
                     <p class="error"><?php echo $LER;?></p>
  				</form>
  				<h3> OR </h3>

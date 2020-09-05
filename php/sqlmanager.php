@@ -6,10 +6,9 @@ function test_input($data) {
     return $data;
 }
 function exequery($query,...$qargs){
-    $json = file_get_contents('./cred.json');
-    $json_data = json_decode($json,true);
-    print_r($json_data);
-    $mysqli = new mysqli("localhost","xeon","xeonsql01","boss");
+    $cred_store = file_get_contents('./cred.json');
+    $creds = json_decode($cred_store,true);
+    $mysqli = new mysqli($creds["host"], $creds["user"], $creds["pass"], "boss");
     if(empty($qargs[0])) return $mysqli -> query($query);
     else {
         $stmt = $mysqli->prepare($query);
