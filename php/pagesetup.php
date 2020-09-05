@@ -5,7 +5,6 @@ function pageHead($t) {
 	$blogvar = '';
 	$logbut ='';
 	if(isset($_SESSION['uid'])){
-		echo "HELLO WORLD";
 		$log = 'Logout';
 		$_SESSION['lval'] = bin2hex(random_bytes(5));
 		$lval = $_SESSION['lval'];
