@@ -4,7 +4,6 @@ function pageHead($t) {
 	$log = 'Login';
 	$blogvar = '';
 	$logbut ='';
-	sessionCheck();
 	if(isset($_SESSION['uid'])){
 		echo "HELLO WORLD";
 		$log = 'Logout';
