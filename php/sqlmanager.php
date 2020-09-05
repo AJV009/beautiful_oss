@@ -6,7 +6,8 @@ function test_input($data) {
     return $data;
 }
 function exequery($query,...$qargs){
-    $mysqli = new mysqli("localhost","root","","boss");
+    
+    $mysqli = new mysqli("localhost","xeon","xeonsql01","boss");
     if(empty($qargs[0])) return $mysqli -> query($query);
     else {
         $stmt = $mysqli->prepare($query);
