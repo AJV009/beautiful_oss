@@ -1,11 +1,15 @@
 <?php
 session_start();
-function sessionClear(){ session_unset(); session_destroy(); }
-function sessionCheck(){ if(!isset($_SESSION['uid'])) phploc('index.php'); }
-function sessionTime(){
-    $time = time();
-    if(isset($_SESSION['lastact']) && ($time-$_SESSION['lastact'])>1800) {
-        session_unset();}
-    $_SESSION['lastact'] = $time;
+if(isset($_COOKIE['bosstime'])) $_SESSION['uid'] = $_COOKIE['bosstime'];
+if(isset($_SESSION['lastact']) AND time() - $_SESSION['lastact'] > 9000) {
+    sessionClear();
+    phploc('index.php');
+} else $_SESSION['lastact'] = time();
+
+function sessionClear(){
+    session_unset(); session_destroy();
+    setcookie("bosstime","",time()-31556926);
+    unset($_COOKIE['life']);
+    unset($_COOKIE['bosstime']);
 }
-sessionTime();
+function sessionCheck(){ if(!isset($_SESSION['uid'])) phploc('index.php'); }

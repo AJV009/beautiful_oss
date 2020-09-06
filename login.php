@@ -1,11 +1,11 @@
 <?php
-error_reporting(0);
+// error_reporting(0);
 include_once 'php/sessionmanager.php';
 include_once 'php/sqlmanager.php';
 include_once 'php/pagesetup.php';
-if(isset($_GET['w']) && $_GET['w']==$_SESSION['lval']) session_unset();
+if(isset($_GET['w']) && $_GET['w']==$_SESSION['lval']) sessionClear();
 else if(isset($_SESSION['uid'])) phploc("index.php");
-else session_unset();
+else sessionClear();
 pageHead('Login');
 $username = $email = $password = $ER = "";
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -16,7 +16,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $requests = exequery('select * from users where username = ?','s',$username);
         $dbrow = mysqli_fetch_array($requests);
         if(password_verify($pass,$dbrow['password'])){
-            $_SESSION['loggedin'] = TRUE; $_SESSION['uid'] = $username;
+            setcookie("life",$_SESSION['uid']);
+            if(isset($_POST["remember"])) setcookie("bosstime",$_SESSION['uid'],time()+31556926);
             phploc("index.php");
         } else { $LER = "Incorrect password/username, please try again!"; jsloc("login.php"); sessionClear();} }
     if( isset( $_POST['signup'] ) ){
@@ -48,7 +49,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 				<form class="w3-container" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
  					<h4 class="w3-left w3-margin-left">Username</h4><input class="w3-input w3-border w3-round-xxlarge" type="text" name="username" required>
     				<h4 class="w3-left w3-margin-left">Password</h4><input class="w3-input w3-border w3-round-xxlarge" type="password" name="password" required>
-    				<input class="w3-btn w3-green w3-round-xxlarge w3-margin" type="submit" value="Login ⚡" name="signin">
+                    <input type="checkbox" id="remember" name="remember" value="rem"> <label for="remember"> Remember me </label> <br>
+                    <input class="w3-btn w3-green w3-round-xxlarge w3-margin" type="submit" value="Login ⚡" name="signin">
                     <p class="error"><?php echo $LER;?></p>
  				</form>
  				<h3> OR </h3>

@@ -6,7 +6,9 @@ function test_input($data) {
     return $data;
 }
 function exequery($query,...$qargs){
-    $mysqli = new mysqli("localhost","root","","boss");
+    $cred_store = file_get_contents('./cred.json');
+    $creds = json_decode($cred_store,true);
+    $mysqli = new mysqli($creds["host"], $creds["user"], $creds["pass"], "boss");
     if(empty($qargs[0])) return $mysqli -> query($query);
     else {
         $stmt = $mysqli->prepare($query);
