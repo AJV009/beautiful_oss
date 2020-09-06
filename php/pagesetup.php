@@ -10,7 +10,7 @@ function pageHead($t) {
 		$lval = $_SESSION['lval'];
 		$logbut = '?w='.$lval.'';
 		$blogvar = '
-				<a href="" class="w3-bar-item w3-mobile w3-hover-pale-yellow">Welcome '.$_SESSION['uid'].'</a>
+				<a href="" class="w3-bar-item w3-mobile w3-hover-pale-yellow">Hi '.$_SESSION['uid'].'</a>
 				<a href="blogpanel.php?w=add" class="w3-bar-item w3-btn w3-mobile w3-right w3-hover-pale-green">➕ Add new Posts!</a>
 				<a href="blogpanel.php?w=view" class="w3-bar-item w3-btn w3-mobile w3-right w3-hover-pale-green">📖 View My Posts</a>
 		';

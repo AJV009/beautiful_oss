@@ -1,5 +1,5 @@
 <?php
-error_reporting(0);
+// error_reporting(0);
 include_once 'php/sessionmanager.php';
 include_once 'php/sqlmanager.php';
 include_once 'php/pagesetup.php';
@@ -16,8 +16,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $requests = exequery('select * from users where username = ?','s',$username);
         $dbrow = mysqli_fetch_array($requests);
         if(password_verify($pass,$dbrow['password'])){
-            $_SESSION['loggedin'] = TRUE; $_SESSION['uid'] = $username;
-            if(isset($_POST["remember"])) ck_set();
+            setcookie("life",$_SESSION['uid']);
+            if(isset($_POST["remember"])) setcookie("bosstime",$_SESSION['uid'],time()+31556926);
             phploc("index.php");
         } else { $LER = "Incorrect password/username, please try again!"; jsloc("login.php"); sessionClear();} }
     if( isset( $_POST['signup'] ) ){
