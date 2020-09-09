@@ -1,4 +1,17 @@
-.error {color: #FF0000;} 
-.success {color: #fffb00;} 
-.msg {color: #FF0000;}
-a {text-decoration: none;}
+.error {
+  color: #ff0000;
+}
+.success {
+  color: #fffb00;
+}
+.msg {
+  color: #ff0000;
+}
+a {
+  text-decoration: none;
+}
+body {
+  padding-top: 100px;
+  background-image: url("../images/c1.webp");
+  background-size: 100% 100%;
+}
