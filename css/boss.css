@@ -15,3 +15,6 @@ body {
   background-image: url("../images/c1.webp");
   background-size: 100% 100%;
 }
+abbr[title] {
+  text-decoration: none;
+}

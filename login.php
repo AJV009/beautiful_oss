@@ -39,7 +39,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $ER = "Password: 1 Lower and Upper case character, 1 number, 1 special character and must be at least 6 characters and at most 50";
         } else if (mysqli_num_rows($requests) <= 0) {
             $hashedpassword = password_hash($pass, PASSWORD_ARGON2ID);
-            exequery('insert into users (username, email, password) values (?,?,?)', 'sss', $username, $email, $hashedpassword);
+            exequery('insert into users (username, email, password, type) values (?,?,?,?)', 'ssss', $username, $email, $hashedpassword, "user");
             $DONE = "Hi " . $username . ", Registration Successful! Now you can login";
         } else {
             $ER = "Username/Email already existing!";
