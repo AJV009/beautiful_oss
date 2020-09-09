@@ -16,6 +16,11 @@ function pageHead($t)
 				<a href="blogpanel.php?w=add" class="w3-bar-item w3-btn w3-mobile w3-right w3-hover-pale-green"> <abbr title="Add an article"> ➕ </abbr> </a>
 				<a href="blogpanel.php?w=view" class="w3-bar-item w3-btn w3-mobile w3-right w3-hover-pale-green"> <abbr title="Read your articles"> 📖 </abbr> </a>
 				';
+		if (isset($_SESSION['admin'])) {
+			$blogvar += '
+			<a href="adminp.php" class="w3-bar-item w3-btn w3-mobile w3-right w3-hover-pale-green"> <abbr title="Administration Board"> 🏛️ </abbr> </a>
+			'; 
+		}
 	}
 	$pH1 = '💪😎 BOSS: Beautiful Open Source Software! ⚡⚡⚡';
 	echo '

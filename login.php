@@ -3,10 +3,12 @@ error_reporting(0);
 include_once 'php/sessionmanager.php';
 include_once 'php/sqlmanager.php';
 include_once 'php/pagesetup.php';
+// ini_set('display_errors', 1); ini_set('display_startup_errors', 1); error_reporting(E_ALL);
 if (isset($_GET['w']) && $_GET['w'] == $_SESSION['lval']) sessionClear();
 else if (isset($_SESSION['uid'])) phploc("index.php");
 else sessionClear();
 pageHead('Login');
+$DONE = $LER = '';
 $username = $email = $password = $ER = "";
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = $_POST["username"];
@@ -19,7 +21,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $_SESSION['uid'] = $username;
             setcookie("life",$_SESSION['uid']);
             if (isset($_POST["remember"])) setcookie("bosstime", $_SESSION['uid'], time() + 31556926);
-            // phploc("test.php");
             phploc("index.php");
         } else {
             $LER = "Incorrect password/username, please try again!";
@@ -34,7 +35,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $ER = "Username: Only letters and numbers allowed";
         } else if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
             $ER = "Email: Invalid email format";
-            jsloc("login.php");
+            phploc("login.php");
         } else if (!preg_match("/^((?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[\W_]).{6,50})$/", $password)) {
             $ER = "Password: 1 Lower and Upper case character, 1 number, 1 special character and must be at least 6 characters and at most 50";
         } else if (mysqli_num_rows($requests) <= 0) {
@@ -56,7 +57,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <br>
             <form class="w3-container" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
                 <h4 class="w3-left w3-margin-left">Username</h4><input class="w3-input w3-border w3-round-xxlarge" type="text" name="username" required>
-                <h4 class="w3-left w3-margin-left">Password</h4><input class="w3-input w3-border w3-round-xxlarge" type="password" name="password" required>
+                <h4 class="w3-left w3-margin-left">Password</h4><input class="w3-input w3-border w3-round-xxlarge" type="password" name="password">
                 <input type="checkbox" id="remember" name="remember" value="rem"> <label for="remember"> Remember me </label> <br>
                 <input class="w3-btn w3-green w3-round-xxlarge w3-margin" type="submit" value="Login ⚡" name="signin">
                 <p class="error"><?php echo $LER; ?></p>
