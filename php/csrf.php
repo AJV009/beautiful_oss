@@ -7,4 +7,3 @@ function anticsrf(...$args){
         return $_SESSION['token'];}
         else return FALSE;
 }
-?>
