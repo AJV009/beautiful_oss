@@ -27,7 +27,8 @@ function blogDisp($except = 0)
 function blogDispId()
 {
     $uid = $_SESSION['uid'];
-    $requests = exequery("select * from posts where username =?", "s", $_SESSION['uid']);
+    if (isset($_SESSION['admin'])) $requests = exequery("select * from posts order by id desc");
+    else $requests = exequery("select * from posts where username =?", "s", $_SESSION['uid']);
     if (mysqli_num_rows($requests) <= 0) pageMsg("😓 You got no blog post till now! Why dont you try writing one? 🤷‍♀️🤷‍♂️ Click on 'Add' on the top-right corner! 💡");
     else {
         while ($row = mysqli_fetch_array($requests)) {
@@ -94,7 +95,8 @@ function blogEdit($blogId)
 {
     $blogId = test_input($blogId);
     $uid = $_SESSION['uid'];
-    $requests = exequery("select * from posts where id = ? and username = ?", "ss", $blogId, $uid);
+    if (isset($_SESSION['admin'])) $requests = exequery("select * from posts where id = ?", "s", $blogId);
+    else $requests = exequery("select * from posts where id = ? and username = ?", "ss", $blogId, $uid);
     $row = mysqli_fetch_array($requests);
     if (empty($row)) {
         jsloc("index.php");
@@ -123,7 +125,8 @@ function blogEdit($blogId)
             $title = test_input($_POST["title"]);
             $short = test_input($_POST["short"]);
             $content = test_input($_POST["content"]);
-            exequery('update posts set title=?, body=?, short=? where id=? and username=?', "sssss", $title, $content, $short, $blogId, $uid);
+            if (isset($_SESSION['admin'])) exequery('update posts set title=?, body=?, short=? where id=?', "ssss", $title, $content, $short, $blogId);
+            else exequery('update posts set title=?, body=?, short=? where id=? and username=?', "sssss", $title, $content, $short, $blogId, $uid);
             jsalert("Hi " . $uid . ", Post Successfuly edited!");
             jsloc("blogpanel.php?w=view");
         }

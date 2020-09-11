@@ -6,9 +6,7 @@ include_once 'php/sqlmanager.php';
 if (isset($_GET['w']) && $_GET['w'] == $_SESSION['lval']) sessionClear();
 else if (isset($_SESSION['uid'])) phploc("index.php");
 else sessionClear();
-
 pageHead('Login');
-
 $DONE = $LER = '';
 $username = $email = $password = $ER = "";
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -20,8 +18,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $dbrow = mysqli_fetch_array($requests);
         if (password_verify($pass, $dbrow['password'])) {
             $_SESSION['uid'] = $username;
-            setcookie("life",$_SESSION['uid']);
-            if (isset($_POST["remember"])) setcookie("bosstime", $_SESSION['uid'], time() + 31556926);
+            if (isset($_POST["remember"])) rememberMe();
             phploc("index.php");
         } else {
             $LER = "Incorrect password/username, please try again!";
@@ -51,7 +48,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 ?>
 
 <section>
-    <div class="w3-container " style="margin-top:1%">
+    <div class="w3-container ">
         <div class="w3-card-4 w3-round-xxlarge w3-sand w3-center" style="margin-left:30%; margin-right:30%">
             <p class="error"><?php echo $DONE; ?></p>
             <h4><br>👉 Log in </h4>

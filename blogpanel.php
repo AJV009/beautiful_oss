@@ -17,7 +17,8 @@ if ($opt == 'view') {
     $uid = $_SESSION['uid'];
     $blogId = test_input($blogId);
     // $query = 'delete from posts where id='.$blogId.' AND username='.$uid.' ';
-    exequery('delete from posts where id=? and username=?', 'ss', $blogId, $uid);
+    if (isset($_SESSION['admin'])) exequery('delete from posts where id=?', 's', $blogId);
+    else exequery('delete from posts where id=? and username=?', 'ss', $blogId, $uid);
     phploc("blogpanel.php?w=view");
 } else blogDispId();
 pageFoot();
