@@ -21,7 +21,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $_SESSION['uid'] = $username;
             setcookie("life",$_SESSION['uid']);
             if (isset($_POST["remember"])) setcookie("bosstime", $_SESSION['uid'], time() + 31556926);
-            phploc("index.php");
+            // phploc("index.php");
+            // print($_SESSION['uid']);
+            // die();
+            phploc("test.php");
         } else {
             $LER = "Incorrect password/username, please try again!";
             jsloc("login.php");

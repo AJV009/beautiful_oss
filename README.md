@@ -1,7 +1,7 @@
 # BOSS: Beautiful Open Source Software Blog.
 
 ## To connect DB ->
-1. Create a cred.json file with details in following order.
+1. Create a cred.json file with details like.
 ```json
 {
     "host":"host_name_or_ip",
@@ -9,6 +9,7 @@
     "pass":"DB_password"
 }
 ```
+or you can specify a custom json file in [sqlmanager.php](php/sqlmanager.php)
 
 ## TODO:
 - Change Logo (canva)
