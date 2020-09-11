@@ -1,13 +1,14 @@
 <?php
-error_reporting(0);
+include_once 'php/pagesetup.php';
 include_once 'php/sessionmanager.php';
 include_once 'php/sqlmanager.php';
-include_once 'php/pagesetup.php';
-// ini_set('display_errors', 1); ini_set('display_startup_errors', 1); error_reporting(E_ALL);
+
 if (isset($_GET['w']) && $_GET['w'] == $_SESSION['lval']) sessionClear();
 else if (isset($_SESSION['uid'])) phploc("index.php");
 else sessionClear();
+
 pageHead('Login');
+
 $DONE = $LER = '';
 $username = $email = $password = $ER = "";
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -48,6 +49,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 }
 ?>
+
 <section>
     <div class="w3-container " style="margin-top:1%">
         <div class="w3-card-4 w3-round-xxlarge w3-sand w3-center" style="margin-left:30%; margin-right:30%">
@@ -80,5 +82,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </div>
     </div>
 </section>
+
 <?php
 pageFoot();

@@ -1,6 +1,10 @@
 <?php
 session_start();
+error_reporting(0);
+// ini_set('display_errors', 1); ini_set('display_startup_errors', 1); error_reporting(E_ALL);
+
 include_once 'php/sqlmanager.php';
+
 if (isset($_COOKIE['bosstime']) AND isset($_COOKIE['remembering'])) {
     $requests = exequery('select log from users where username = ?', 's', $_COOKIE['bosstime']);
     $row = mysqli_fetch_array($requests);
