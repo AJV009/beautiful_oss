@@ -83,4 +83,5 @@ function jsloc($uri)
 function phploc($uri)
 {
 	header("location: $uri");
+	exit();
 }

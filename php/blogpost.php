@@ -78,7 +78,9 @@ function blogAdd()
             $requests = exequery('select * from posts where title = ?', 's', $title);
             if (mysqli_num_rows($requests) <= 0) {
                 $current_date = date("Y-m-d");
-                exequery("insert into posts (title, body, username, short, created_at) values (?,?,?,?,?)", 'sssss', $title, $content, $uid, $short, $current_date);
+                $pass = $title + $_SESSION['uid'] + $current_date + $short + bin2hex(random_bytes(10));
+                $hashedpassword = password_hash($pass, PASSWORD_ARGON2ID);
+                exequery("insert into posts (title, body, username, short, created_at, rid) values (?,?,?,?,?,?)", 'ssssss', $title, $content, $uid, $short, $current_date, $hashedpassword);
                 jsalert("Hi " . $uid . ", Post Successfuly created!");
                 jsloc("blogpanel.php?w=view");
             } else {

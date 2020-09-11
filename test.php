@@ -1,3 +1,3 @@
 <?php
 session_start();
-echo $_SESSION['uid'];
+var_dump($_SESSION);

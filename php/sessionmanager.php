@@ -34,12 +34,14 @@ function sessionClear()
 {
     session_unset();
     session_destroy();
+    session_regenerate_id(true);
     setcookie("bosstime", "", time() - 31556926);
     setcookie("remembering", "", time() - 31556926);
     setcookie("life", "", time() - 31556926);
     unset($_COOKIE['life']);
     unset($_COOKIE['remembering']);
     unset($_COOKIE['bosstime']);
+    session_start();
 }
 function sessionCheck()
 {
