@@ -1,4 +1,10 @@
 <?php
+function test_input($data) {
+    $data = trim($data);
+    $data = stripslashes($data);
+    $data = htmlspecialchars($data);
+    return $data;
+}
 function exequery($query, ...$qargs)
 {
     $cred_store = file_get_contents('./cred.json');

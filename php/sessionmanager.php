@@ -1,7 +1,7 @@
 <?php
 session_start();
-// error_reporting(0);
-ini_set('display_errors', 1); ini_set('display_startup_errors', 1); error_reporting(E_ALL);
+error_reporting(0);
+// ini_set('display_errors', 1); ini_set('display_startup_errors', 1); error_reporting(E_ALL);
 
 include_once 'php/sqlmanager.php';
 
@@ -14,11 +14,11 @@ if (isset($_COOKIE['remembering'])) {
     $requests = exequery('select log, username from users where log = ?', 's', $_COOKIE['remembering']);
     if (mysqli_num_rows($requests) > 0) {
         $row = mysqli_fetch_array($requests);
-        echo $row;
         if (password_verify($row["log"],$_COOKIE['remembering'])){
             $_SESSION['uid'] = $row["username"];
             $_COOKIE['remembering'] = password_hash($row["log"], PASSWORD_ARGON2ID);
         }
+        unset($row);
     }
 }
 

@@ -6,7 +6,7 @@ function pageHead($t)
 	$log = "Login / Register";
 	$logbut = '';
 	if (isset($_SESSION['uid'])) {
-		$_SESSION['lval'] = bin2hex(random_bytes(5));
+		$_SESSION['lval'] = $_SESSION['uid'] . bin2hex(random_bytes(5));
 		$lval = $_SESSION['lval'];
 		$logbut = '?w=' . $lval . '';
 		$log = "Logout";
