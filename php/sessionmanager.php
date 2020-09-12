@@ -11,10 +11,14 @@ if (isset($_SESSION['lastact']) and time() - $_SESSION['lastact'] > 9000) {
 } else $_SESSION['lastact'] = time();
 
 if (isset($_COOKIE['remembering'])) {
-    $requests = exequery('select * from users where log = ?', 's', $_COOKIE['remembering']);
+    $requests = exequery('select log, username from users where log = ?', 's', $_COOKIE['remembering']);
     if (mysqli_num_rows($requests) > 0) {
         $row = mysqli_fetch_array($requests);
-        if ($_COOKIE['remembering'] == $row["log"]) $_SESSION['uid'] = $row["username"];
+        echo $row;
+        if (password_verify($row["log"],$_COOKIE['remembering'])){
+            $_SESSION['uid'] = $row["username"];
+            $_COOKIE['remembering'] = password_hash($row["log"], PASSWORD_ARGON2ID);
+        }
     }
 }
 
@@ -26,10 +30,11 @@ if (isset($_SESSION['uid'])) {
 
 function rememberMe()
 {
-    $keygen = bin2hex(random_bytes(mt_rand(10,15))) . $_SESSION['uid'] . bin2hex(random_bytes(mt_rand(15,20)));
+    $keygen = bin2hex(random_bytes(mt_rand(5,10))) . $_SESSION['uid'] . bin2hex(random_bytes(mt_rand(1,5)));
     $key = password_hash($keygen, PASSWORD_ARGON2ID); 
     setcookie('remembering', $key, time() + 31556926);
-    exequery('update users set log=? where username=?', "ss", $key, $_SESSION['uid']);
+    exequery('update users set log=? where username=?', "ss", $keygen, $_SESSION['uid']);
+    unset($keygen);
 }
 
 function sessionClear()
