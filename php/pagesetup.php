@@ -24,17 +24,19 @@ function pageHead($t)
 	}
 	$pH1 = '💪😎 BOSS: Beautiful Open Source Software! ⚡⚡⚡';
 	echo '
-	<html>
+	<!DOCTYPE html>
+	<html lang="en">
 	<head>
 	<title>' . $title . '</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" href="css/w3.css">
-	<link rel="stylesheet" href="css/boss.css">
-	<link rel="icon" href="images\logo.webp" type="image/x-icon">
+	<link rel="stylesheet" href="css/w3.css" async>
+	<link rel="stylesheet" href="css/boss.css" async>
+	<link rel="icon" href="images\logo.webp" type="image/x-icon" async>
+	<meta name="Description" content="Beautifull Open Source Blogging.">
 	</head>
 
 	<body>
-	<section style="max-width: 100% !important; padding-bottom: 110px !important; ">
+	<section style="max-width: 100% !important; padding-bottom: 125px !important; ">
 			<div class="w3-top w3-container w3-teal w3-card-4" align=center style="margin-bottom: 500%;">
 				<h1 style="display: inline;">' . $pH1 . '</h1>
 				<div class="w3-bar w3-green w3-card-4">
